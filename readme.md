@@ -161,7 +161,7 @@ Let's &nbsp;  a) Run the project, &nbsp; b) Explore the JSON:API, &nbsp; and c) 
     3. Click the green button to start the server
 <br><br>
 
-2. Start the Browser at localhost:5656, using the **url shown in the console log**.
+2. **Open in Browser** as shown below.
   * This opens the Admin App, which provides access to Swagger.
 
 ![](https://apilogicserver.github.io/Docs/images/tutorial/2-apilogicproject.png)
