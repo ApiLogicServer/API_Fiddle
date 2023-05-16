@@ -84,7 +84,7 @@ To run the basic app:
 
 &nbsp;
 
-[Open the readme](./1.%20Learn%20APIs%20using%20Flask%20SqlAlchemy/readme.md) for background APIs, Flask, SQLAlchemy, and a walk-through of the code.
+[Open the readme](./1.%20Learn%20APIs%20using%20Flask%20SqlAlchemy/readme.md) for background on APIs, Flask, SQLAlchemy, and a walk-through of the code.
 
 When you are done, **stop** the server (Step 3).
 
@@ -288,9 +288,12 @@ It operates as shown below:
 
 * B) Use the CLI to generate an executable project
 
-  * The system reads your database to create an executable API Logic Project
+  * The system reads your database to create an executable API Logic Project<br>
+&nbsp;
 
 * C) Customize and debug it in VSCode, PyCharm, etc.
+
+  * Declare logic, code new endpoints, customize the data model
 
 
 ![](https://apilogicserver.github.io/Docs/images/creates-and-runs.png)
