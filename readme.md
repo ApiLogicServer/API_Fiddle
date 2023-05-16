@@ -78,7 +78,7 @@ To run the basic app:
 
 3. Create a new `bash`/`zsh` window, and paste the `cURL` text
 
-![](https://github.com/ApiLogicServer/Docs/blob/main/docs/images/tutorial/1-basic-app-tutorial.png?raw=true)
+![](https://github.com/ApiLogicServer/Docs/blob/main/docs/images/tutorial/1-basic-app?raw=true)
 
 </details>
 
@@ -164,7 +164,7 @@ Let's &nbsp;  a) Run the project, &nbsp; b) Explore the JSON:API, &nbsp; and c) 
 2. Start the Browser at localhost:5656, using the **url shown in the console log**.
   * This opens the Admin App, which provides access to Swagger.
 
-![](https://apilogicserver.github.io/Docs/images/tutorial/2-apilogicproject-tutorial.png)
+![](https://apilogicserver.github.io/Docs/images/tutorial/2-apilogicproject.png)
 
 </details run project>
 
