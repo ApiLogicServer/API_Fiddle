@@ -23,11 +23,9 @@ Akin to a JSFiddle, Codespaces creates a complete executable environment with **
 
 <br>
 
-<summary>Welcome to this Learning Center -- APIs, using Flask and SQLAlchemy</summary>
+<summary>Welcome -- Learn about APIs, using Flask and SQLAlchemy</summary>
 
 This Learning Center is designed to help you learn about creating APIs, specifically JSON:APIs, using Python Flask and SQLAlchemy.  
-
-
 
 Most database applications require **networked database access**. You simply cannot call database access libraries (e.g., ODBC, JDBC) from a mobile app or a remote computer (B2B or application integration).
 
@@ -45,7 +43,7 @@ This contains 2 ready-to-run projects:<br>
 
 These projects use the [Northwind Sample Database](https://apilogicserver.github.io/Docs/Sample-Database/) (customers, orders, products).
 
-> Suggestion: close *Welcome to this Learning Center*, above, to proceed.
+> Suggestion: close *Welcome*, above, to proceed.
 
 &nbsp;
 &nbsp;
