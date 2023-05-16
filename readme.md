@@ -461,7 +461,7 @@ Click here for the [docs](https://apilogicserver.github.io/Docs/).
 &nbsp;
 
 
-| Tech Area | Skill | App_Fiddle Example | APILogicProject Logic Example | Notes   |
+| Tech Area | Skill | 1. Learn APIs Example | 2. Learn JSON:API Example | Notes   |
 |:---- |:------|:-----------|:--------|:--------|
 | __Flask__ | Setup | [```flask_basic.py```](1.%20Learn%20APIs%20using%20Flask%20SqlAlchemy/flask_basic.py) |  [```api_logic_server_run.py```](./2.%20Learn%20JSON_API%20using%20API%20Logic%20Server/api_logic_server_run.py) |  |
 |  | Events | |  [```ui/admin/admin_loader.py```](./2.%20Learn%20JSON_API%20using%20API%20Logic%20Server/ui/admin/admin_loader.py) |  |

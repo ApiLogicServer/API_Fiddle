@@ -11,3 +11,4 @@ ApiLogicProject/.vscode
 ApiLogicProject/**/__pycache__
 Thrift.log
 *.pyc
+2. Learn JSON_API using API Logic Server/ui/admin/authentication_admin.yaml
