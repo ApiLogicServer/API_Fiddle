@@ -412,23 +412,7 @@ Use the [```Detailed Tutorial```](./2.%20Learn%20JSON_API%20using%20API%20Logic%
 
 &nbsp;
 
-<summary>Notes, Next Steps: New Projects</summary>
-
-**Project Structure**
-
-<details markdown>
-
-&nbsp;
-
-<summary>Project Structure</summary>
-
-This tutorial is actually 2 independent projects.  When you create a project using `ApiLogicServer create --project_name=my_project`, the system will create a free-standing project.  The project will include your container settings, IDE settings etc, so you can just open it your IDE to run and debug.
-
-</details project structure>
-
-&nbsp;
-
-**Creating New Projects**
+**Try Creating New Projects**
 
 <details markdown>
 
@@ -436,7 +420,7 @@ This tutorial is actually 2 independent projects.  When you create a project usi
 
 &nbsp;
 
-As shown above, it's easy to create projects with a single command.  To help you explore, ApiLogicServer provides several pre-installed sqlite sample databases:
+As described above, you can create projects with a single command.  To help you explore, ApiLogicServer provides several pre-installed sqlite sample databases:
 
 ```bash
 cd API_Fiddle
@@ -467,6 +451,23 @@ The system provides shorthand notations for the pre-installed sample databases a
 </details url>
 
 </details new projects>
+
+&nbsp;
+
+<summary>Notes, Next Steps: New Projects</summary>
+
+**Project Structure**
+
+<details markdown>
+
+&nbsp;
+
+<summary>Project Structure</summary>
+
+This tutorial is actually 2 independent projects.  When you create a project using `ApiLogicServer create --project_name=my_project`, the system will create a free-standing project.  The project will include your container settings, IDE settings etc, so you can just open it your IDE to run and debug.
+
+</details project structure>
+
 
 </details notes next steps>
 
