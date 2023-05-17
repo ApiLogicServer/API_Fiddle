@@ -74,17 +74,20 @@ To run the basic app:
 
 1. Click **Run and Debug** (you should see **1. Learn APIs using Flask SqlAlchemy**), and the green button to start the server
 
+  * Do ***Not*** click `Open in Browser`
+
 2. Copy the `cURL` text
 
 3. Create a new `bash`/`zsh` window, and paste the `cURL` text
 
-![](https://github.com/ApiLogicServer/Docs/blob/main/docs/images/tutorial/1-basic-app?raw=true)
+![](https://github.com/ApiLogicServer/Docs/blob/main/docs/images/tutorial/1-basic-app.png?raw=true)
 
 </details>
 
 &nbsp;
 
-[Open the readme](./1.%20Learn%20APIs%20using%20Flask%20SqlAlchemy/readme.md) for background on APIs, Flask, SQLAlchemy, and a walk-through of the code.
+To understand how we used Flask / SQLAlchemy to create the resulting response text, 
+[open the readme](./1.%20Learn%20APIs%20using%20Flask%20SqlAlchemy/readme.md).  Before walking you through the code, it provides brief background on APIs, Flask, and SQLAlchemy.
 
 When you are done, **stop** the server (Step 3).
 
@@ -134,7 +137,7 @@ Below, we'll see an approach that combines the ***flexibility of a framework wit
 
 <br>
 
-This project:
+Project 2 is much more like a real server.  It:
 
 * Implements a **JSON:API -- a API standard definition** for filtering, sorting, pagination, and multi-table retrieval.  It also provides Swagger, for exploring the API.
 
@@ -161,7 +164,7 @@ Let's &nbsp;  a) Run the project, &nbsp; b) Explore the JSON:API, &nbsp; and c) 
     3. Click the green button to start the server
 <br><br>
 
-2. **Open in Browser** as shown below.
+2. **Open in Browser** as shown below (you might to wait a moment while the server restarts for debug).
   * This opens the Admin App, which provides access to Swagger.
 
 ![](https://apilogicserver.github.io/Docs/images/tutorial/2-apilogicproject.png)
@@ -187,12 +190,17 @@ This project implements the JSON:API style, providing an enterprise-class API:
 * An endpoint for each table, with CRUD support - create, read, update and delete.
 * Get requests provide filtering, sorting, and pagination.
 * APIs include related data access, based on relationships in the models file (typically derived from foreign keys).
+* Swagger - a browser-based user interface for testing the API.
+
+&nbsp;
+
+Let's now use Swagger to explore the API.
 
 &nbsp;
 
 <details markdown>
 
-<summary>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b.1) Explore with Swagger </summary>
+<summary>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b.1) Explore API with Swagger </summary>
 
 &nbsp;
 
