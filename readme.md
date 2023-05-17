@@ -137,137 +137,26 @@ Below, we'll see an approach that combines the ***flexibility of a framework wit
 
 <br>
 
+<details markdown>
+
+<summary>&nbsp;&nbsp;&nbsp;Project Overview</summary>
+
+<br>
+
 Project 2 is much more like a real server.  It:
 
-* Implements a **JSON:API -- a API standard definition** for filtering, sorting, pagination, and multi-table retrieval.  It also provides Swagger, for exploring the API.
+* Implements a **JSON:API -- a standard definition** for filtering, sorting, pagination, and multi-table retrieval.
+  * Such **standards eliminate complex and time-consuming design**
+
+  *  JSON:APIs are **self-service**, with *consumer-defined* response inclusion
+      * Similar to GraphQL, clients declare what data to include, rather than relying on pre-defined resources.<br><br>
 
 * Was **built using API Logic Server** --  an open source project providing:
 
   * **Automatic Creation:** a single command creates the project from your database (including an Admin App)
-  * **Customize with your IDE:** declare spreadsheet-like rules for business logic, and code extra API endpoints
 
-Let's &nbsp;  a) Run the project, &nbsp; b) Explore the JSON:API, &nbsp; and c) Explore JSON:API Update Logic.
+  * **Customize with your IDE:** declare spreadsheet-like **business logic rules**, and code extra API endpoints
 
-&nbsp;
-
-
-<details markdown>
-
-<summary>&nbsp;&nbsp;&nbsp;a) Run the project</summary>
-
-&nbsp;
-
-1. Start the Server:
-
-    1. Click **Run and Debug**
-    2. Use the dropdown to select **2. Learn JSON_API using API Logic Server**, and
-    3. Click the green button to start the server
-<br><br>
-
-2. **Open in Browser** as shown below (you might to wait a moment while the server restarts for debug).
-  * This opens the Admin App, which provides access to Swagger.
-
-![](https://apilogicserver.github.io/Docs/images/tutorial/2-apilogicproject.png)
-
-</details run project>
-
-&nbsp;
-
-<details markdown>
-
-<summary>&nbsp;&nbsp;&nbsp;b) Explore JSON:API Get</summary>
-
-&nbsp;
-
-JSON:API is:
-
-* a **Standardized API** definition, eliminating **complex and time-consuming design**
-* **Self-service**, with *consumer-defined* response inclusion
-  * Similar to GraphQL, this enables clients to travserse the exact set of related data they need, rather than making do with a set of resources pre-defined by the server team
-
-This project implements the JSON:API style, providing an enterprise-class API:
-
-* An endpoint for each table, with CRUD support - create, read, update and delete.
-* Get requests provide filtering, sorting, and pagination.
-* APIs include related data access, based on relationships in the models file (typically derived from foreign keys).
-* Swagger - a browser-based user interface for testing the API.
-
-&nbsp;
-
-Let's now use Swagger to explore the API.
-
-&nbsp;
-
-<details markdown>
-
-<summary>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b.1) Explore API with Swagger </summary>
-
-&nbsp;
-
-Automatic Swagger: from the **Home** page of the Admin App, execute it like this:
-
-  1. Click **2. API, with oas/Swagger**
-  2. Click **Customer**
-  3. Click **Get**
-  4. Click **Try it out**
-  5. Click **Execute**:
-
-![](https://apilogicserver.github.io/Docs/images/tutorial/explore-api.png)  
-
-</details swagger>
-
-&nbsp;
-
-<details markdown>
-
-<summary>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b.2) Consumer-defined response inclusion</summary>
-
-&nbsp;
-
-Note the `include` argument; you can specify:
-
-```
-OrderList,OrderList.OrderDetailList,OrderList.OrderDetailList.Product
-```
-
-You can paste the `Customer` response into tools like [jsongrid](https://jsongrid.com/json-grid):
-
-![](https://apilogicserver.github.io/Docs/images/tutorial/jsongrid.png)
-
-</details consumer>
-
-&nbsp;
-
-<details markdown>
-
-<summary>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b.3) Extensible: Python, Flask, SQLAlchemy </summary>
-
-&nbsp;
-
-All the API functions so far were completely created by API Logic Server.  As required, you extend the API using standard Python, Flask and SQLAlchemy.
-
-See the code in `api/customize_api.py`, and find the code `order()`.  Test it with the cURL string provided in the comments.
-
-You can also make the endpoint **visible in swagger**.  Find the code `ServicesEndPoint(safrs.JABase)`.
-
-</details extensible>
-
-</details what is json:api>
-
-&nbsp;
-<details markdown>
-
-<summary>&nbsp;&nbsp;&nbsp;c) Explore JSON:API Update Logic </summary>
-
-&nbsp;
-
-APIs must ensure that updates adhere to business rules: **multi-table derivations and constraints**.  Such business logic is critical, and often constitutes **nearly half the code**.
-
-API Logic Server enables you to declare **spreadsheet-like rules** for multi-table derivations and constraints, extensible with Python.  Just as a spreadsheet simplifies financial analysis, these **rules are 40X more concise than code.**
-
-* Rules are declared in `logic/declare_logic.py` (IDE provides *code completion*)
-
-* For more on rules, see `logic/readme_declare_logic.py`
 
 &nbsp;
 
@@ -321,6 +210,132 @@ It operates as shown below:
 
 &nbsp;
 
+Let's &nbsp;  2.a) Start the Server, &nbsp; 2.b) Explore the JSON:API, &nbsp; and 2.c) Explore JSON:API Update Logic.
+
+&nbsp;
+
+> You might want to close _Project Overview_, above.
+
+&nbsp;
+
+</details project overview>
+
+
+&nbsp;
+
+
+<details markdown>
+
+<summary>&nbsp;&nbsp;&nbsp;2.a) Start the Server and Open the Admin App</summary>
+
+&nbsp;
+
+1. Start the Server:
+
+    1. Click **Run and Debug**
+    2. Use the dropdown to select **2. Learn JSON_API using API Logic Server**, and
+    3. Click the green button to start the server
+<br><br>
+
+2. **Open in Browser** as shown below (you might to wait a moment while the server restarts for debug).
+  * This opens the Admin App, which provides access to Swagger.
+
+![](https://apilogicserver.github.io/Docs/images/tutorial/2-apilogicproject.png)
+
+</details run project>
+
+&nbsp;
+
+<details markdown>
+
+<summary>&nbsp;&nbsp;&nbsp;2.b) Explore JSON:API Get Using Swagger</summary>
+
+<br>
+
+Let's now use Swagger (automatically created) to explore the API.
+
+&nbsp;
+
+<details markdown>
+
+<summary>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b.1) Open Swagger from the Admin App Home Page </summary>
+
+&nbsp;
+
+Automatic Swagger: from the **Home** page of the Admin App, execute it like this:
+
+  1. Click **2. API, with oas/Swagger**
+  2. Click **Customer**
+  3. Click **Get**
+  4. Click **Try it out**
+  5. Click **Execute**:
+
+![](https://apilogicserver.github.io/Docs/images/tutorial/explore-api.png)  
+
+</details swagger>
+
+&nbsp;
+
+<details markdown>
+
+<summary>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b.2) Consumer-defined response inclusion</summary>
+
+&nbsp;
+
+Note the `include` argument; you can specify:
+
+```
+OrderList,OrderList.OrderDetailList,OrderList.OrderDetailList.Product
+```
+
+You can paste the `Customer` response into tools like [jsongrid](https://jsongrid.com/json-grid):
+
+![](https://apilogicserver.github.io/Docs/images/tutorial/jsongrid.png)
+
+</details consumer>
+
+&nbsp;
+
+
+<details markdown>
+
+<summary>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b.3) Extensible: Python, Flask, SQLAlchemy </summary>
+
+&nbsp;
+
+All the API functions so far were completely created by API Logic Server.  As required, you extend the API using standard Python, Flask and SQLAlchemy.
+
+See the code in `api/customize_api.py`, and find the code `order()`.  Test it with the cURL string provided in the comments.
+
+You can also make the endpoint **visible in swagger**.  Find the code `ServicesEndPoint(safrs.JABase)`.
+
+&nbsp;
+
+> Suggestion: close *2.b) Explore JSON:API Get Using Swagger*, above, to proceed.
+
+&nbsp;
+
+</details extensible>
+
+</details what is json:api>
+
+&nbsp;
+<details markdown>
+
+<summary>&nbsp;&nbsp;&nbsp;2.c) Explore JSON:API Update Logic </summary>
+
+&nbsp;
+
+APIs must ensure that updates adhere to business rules: **multi-table derivations and constraints**.  Such business logic is critical, and often constitutes **nearly half the code**.
+
+API Logic Server enables you to declare **spreadsheet-like rules** for multi-table derivations and constraints, extensible with Python.  Just as a spreadsheet simplifies financial analysis, these **rules are 40X more concise than code.**
+
+* Rules are declared in `logic/declare_logic.py` (IDE provides *code completion*)
+
+* For more on rules, see `logic/readme_declare_logic.py`
+
+&nbsp;
+
 **Patch to test logic**
 
 If we:
@@ -359,14 +374,14 @@ Use the [```Detailed Tutorial```](./2.%20Learn%20JSON_API%20using%20API%20Logic%
 
 &nbsp;
 
-<summary>Key Takeaways: Instant App/API, Fully Flexible, Unique Declarative Rules</summary>
+<summary>Key Takeaways: Instant JSON:API and Admin App, Fully Flexible, Unique Declarative Rules</summary>
 
 This has been a quick look at the *fastest and simplest** way to create **modern, scalable API-based database systems:**
 
 1. Use the `ApiLogicServer create` command to create a Flask/SQLAlchemy project from your database. Zero learning curve. Projects are **instantly executable**, providing:
 
     * **an Admin App:** multi-page, multi-table apps -- ready for business user agile collaboration
-    * **an API:** end points for each table, with filtering, sorting, pagination and related data access -- ready for custom app dev<br><br>
+    * **a JSON:API:** end points for each table, with filtering, sorting, pagination and related data access -- ready for custom app dev<br><br>
 
 2. **Open Flexibility:** leverage standards for development and deployment:
 
