@@ -378,16 +378,21 @@ Use the [```Detailed Tutorial```](./2.%20Learn%20JSON_API%20using%20API%20Logic%
 
 &nbsp;
 
-<summary>Key Takeaways: Instant JSON:API and Admin App, Fully Flexible, Unique Declarative Rules</summary>
+<summary>Key Takeaways: JSON:APIs -- Instantly, With Logic and Admin App; Standard Tools </summary>
 
-This has been a quick look at the *fastest and simplest* way to create **modern, scalable API-based database systems:**
+**JSON:APIs** are worth a look:
+
+* Standards eliminate complex and time-consuming design
+* Self-service APIs eliminate bottlenecks in backend development
+
+**API Logic Server** creates JSON:API systems instantly:
 
 1. Use the `ApiLogicServer create` command to create a Flask/SQLAlchemy project from your database. Zero learning curve. Projects are **instantly executable**, providing:
 
-    * **an Admin App:** multi-page, multi-table apps -- ready for business user agile collaboration
-    * **a JSON:API:** end points for each table, with filtering, sorting, pagination and related data access -- ready for custom app dev<br><br>
+    * **a JSON:API:** end points for each table, with filtering, sorting, pagination and related data access -- ready for custom app dev
+    * **an Admin App:** multi-page, multi-table apps -- ready for business user agile collaboration<br><br>
 
-2. **Open Flexibility:** leverage standards for development and deployment:
+2. **Leverage Standard Tools** for development and deployment:
 
     * Dev: customize and debug with **<span style="background-color:Azure;">standard dev tools</span>**.  Use *your IDE (e.g. <span style="background-color:Azure;">VSCode, PyCharm</span>)*, <span style="background-color:Azure;">Python</span>, and Flask/SQLAlchemy to create new services.  Manage projects with <span style="background-color:Azure;">GitHub</span>.
 
