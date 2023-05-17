@@ -330,7 +330,7 @@ You can also make the endpoint **visible in swagger**.  Find the code `ServicesE
 
 &nbsp;
 
-APIs must ensure that updates adhere to business rules: **multi-table derivations and constraints**.  Such business logic is critical, and often constitutes **nearly half the code**.
+APIs must ensure that updates adhere to business rules: **multi-table derivations and constraints**.  Such business logic is not only critical, it's extensive: it often constitutes **nearly half the code**.
 
 API Logic Server enables you to declare **spreadsheet-like rules** for multi-table derivations and constraints, extensible with Python.  Just as a spreadsheet simplifies financial analysis, these **rules are 40X more concise than code.**
 
@@ -363,7 +363,7 @@ curl -X 'PATCH' \
 }'
 ```
 
-We see the log of logic execution (note the **rule chaining**), and the system state at our breakpoint:
+We see the log of logic execution (note the **multi-table rule chaining**), and the system state at our breakpoint:
 
 ![API Logic Server Intro](https://apilogicserver.github.io/Docs/images/tutorial/patch-orderdetail.png)
 
@@ -380,7 +380,7 @@ Use the [```Detailed Tutorial```](./2.%20Learn%20JSON_API%20using%20API%20Logic%
 
 <summary>Key Takeaways: Instant JSON:API and Admin App, Fully Flexible, Unique Declarative Rules</summary>
 
-This has been a quick look at the *fastest and simplest** way to create **modern, scalable API-based database systems:**
+This has been a quick look at the *fastest and simplest* way to create **modern, scalable API-based database systems:**
 
 1. Use the `ApiLogicServer create` command to create a Flask/SQLAlchemy project from your database. Zero learning curve. Projects are **instantly executable**, providing:
 
@@ -417,7 +417,7 @@ This has been a quick look at the *fastest and simplest** way to create **modern
 
 <summary>Project Structure</summary>
 
-This tutorial is actually 3 independent projects.  When you create a project using `ApiLogicServer create --project_name=my_project`, the system will create a free-standing project.  The project will include your container settings, IDE settings etc, so you can just open it your IDE to run and debug.
+This tutorial is actually 2 independent projects.  When you create a project using `ApiLogicServer create --project_name=my_project`, the system will create a free-standing project.  The project will include your container settings, IDE settings etc, so you can just open it your IDE to run and debug.
 
 </details project structure>
 
@@ -429,10 +429,12 @@ This tutorial is actually 3 independent projects.  When you create a project usi
 
 <summary>Creating New Projects</summary>
 
+&nbsp;
+
 As shown above, it's easy to create projects with a single command.  To help you explore, ApiLogicServer provides several pre-installed sqlite sample databases:
 
 ```bash
-cd tutorial
+cd API_Fiddle
 
 ApiLogicServer create --db_url=sqlite:///sample_db.sqlite --project_name=nw
 
@@ -456,8 +458,6 @@ Then, **restart** the server as above, using the pre-created Run Configuration f
 &nbsp;
 
 The system provides shorthand notations for the pre-installed sample databases above.  For your own databases, you will need to provide a SQLAlchemy URI for the `db_url` parameter.  These can be tricky - try `ApiLogicServer examples`, or, when all else fails, [try the docs](https://apilogicserver.github.io/Docs/Database-Connectivity/).
-
-Click here for the [docs](https://apilogicserver.github.io/Docs/).
 
 </details url>
 
