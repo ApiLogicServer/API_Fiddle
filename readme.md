@@ -1,6 +1,6 @@
 # API Fiddle
 
-Run this Learning Center under Codespaces -- [click here](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=641207071).
+Run under Codespaces -- [click here](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=641207071).
 
 
 <details markdown>
@@ -27,9 +27,7 @@ Akin to a JSFiddle, Codespaces creates a complete executable environment with **
 
 This Learning Center is designed to help you learn about creating APIs, specifically JSON:APIs, using Python Flask and SQLAlchemy.  
 
-Most database applications require **networked database access**. You simply cannot call database access libraries (e.g., ODBC, JDBC) from a mobile app or a remote computer (B2B or application integration).
-
-**RESTful APIs** have become a common element of a modern software architecture to provide such access.  Microservice concepts stress that **APIs should enforce the *business logic*** for integrity and security.
+**RESTful APIs** have become a common element of a modern software architecture to provide **networked database access**s.  Microservice concepts stress that **APIs should enforce the *business logic*** for integrity and security.
 
 This contains 2 ready-to-run projects:<br>
 
@@ -74,22 +72,21 @@ To run the basic app:
 
 1. Click **Run and Debug** (you should see **1. Learn APIs using Flask SqlAlchemy**), and the green button to start the server
 
-  * Do ***Not*** click `Open in Browser`
+    * Do ***Not*** click `Open in Browser`<br><br>
 
 2. Copy the `cURL` text
 
-3. Create a new `bash`/`zsh` window, and paste the `cURL` text
+3. Open the `bash` window, and paste the `cURL` text
+
+    * Observe the resulting response text<br><br>
+
+4. [**Open the readme**](./1.%20Learn%20APIs%20using%20Flask%20SqlAlchemy/readme.md) to understand Flask / SQLAlchemy usage
+
+    * The readme also provides brief background on APIs, Flask, and SQLAlchemy
 
 ![](https://github.com/ApiLogicServer/Docs/blob/main/docs/images/tutorial/1-basic-app.png?raw=true)
 
 </details>
-
-&nbsp;
-
-To understand how we used Flask / SQLAlchemy to create the resulting response text, 
-[open the readme](./1.%20Learn%20APIs%20using%20Flask%20SqlAlchemy/readme.md).  Before walking you through the code, it provides brief background on APIs, Flask, and SQLAlchemy.
-
-When you are done, **stop** the server (Step 3).
 
 &nbsp;
 
@@ -99,7 +96,7 @@ When you are done, **stop** the server (Step 3).
 
 &nbsp;
 
-Frameworks are flexible, and leverage your existing dev environment (IDE, git, etc).  But the manual effort is time-consuming, and complex.  This minimal project **does not provide:**
+Frameworks like Flask are flexible, and leverage your existing dev environment (IDE, git, etc).  But the manual effort is time-consuming, and complex.  This minimal project **does not provide:**
 
 <img align="right" width="150" height="150" src="https://github.com/ApiLogicServer/Docs/blob/main/docs/images/vscode/app-fiddle/horse-feathers.jpg?raw=true" alt="Horse Feathers">
 
@@ -114,6 +111,10 @@ Frameworks are flexible, and leverage your existing dev environment (IDE, git, e
 Below, we'll see an approach that combines the ***flexibility of a framework with the speed of low-code.***
 
 </details>
+
+&nbsp;
+
+When you are done, **stop** the server (Step 3).
 
 &nbsp;
 
@@ -168,7 +169,7 @@ Project 2 is much more like a real server.  It:
 
 **What is Installed**
 
-API Logic server installs with `pip`, in a docker container, or in codespaces.  As shown below, it consists of a:
+API Logic server installs with `pip`, in a docker container, or (here) in codespaces.  As shown below, it consists of a:
 
 * **CLI:** the `ApiLogicServer create` command you saw above
 * **Runtime Packages:** for API, UI and Logic execution<br>
@@ -185,6 +186,8 @@ It operates as shown below:
 
 * B) Use the CLI to generate an executable project
 
+  * E.g.: `ApiLogicServer create --project_name=nw --db_url=nw-`
+
   * The system reads your database to create an executable API Logic Project<br>
 &nbsp;
 
@@ -200,7 +203,8 @@ It operates as shown below:
 **Standard, Scalable Modern Architecture**
 
 * A modern 3-tiered architecture, accessed by **APIs**
-* Logic is **automatically reused**, factored out of web apps and custom services
+* Logic is **automatically invoked**, operating as a SQLAlchemy event listener
+  * Observe logic is *automatic re-used* by web apps and custom services
 * **Containerized** for scalable cloud deployment - the project includes a dockerfile to containerize it to DockerHub.
 
 
@@ -237,8 +241,8 @@ Let's &nbsp;  2.a) Start the Server, &nbsp; 2.b) Explore the JSON:API, &nbsp; an
     3. Click the green button to start the server
 <br><br>
 
-2. **Open in Browser** as shown below (you might to wait a moment while the server restarts for debug).
-  * This opens the Admin App, which provides access to Swagger.
+2. **Open in Browser** as shown below (you'll need to wait a moment for the server to restart for debug support).
+    * This opens the Admin App, which provides access to Swagger.
 
 ![](https://apilogicserver.github.io/Docs/images/tutorial/2-apilogicproject.png)
 
@@ -278,7 +282,7 @@ Automatic Swagger: from the **Home** page of the Admin App, execute it like this
 
 <details markdown>
 
-<summary>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b.2) Consumer-defined response inclusion</summary>
+<summary>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b.2) Consumer-defined response: the include argument</summary>
 
 &nbsp;
 
