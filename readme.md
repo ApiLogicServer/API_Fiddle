@@ -7,9 +7,21 @@ Run under Codespaces -- [click here](https://github.com/codespaces/new?hide_repo
 
 <br>
 
-<summary>Codespaces provides an API "fiddle"</summary>
+<summary>An "API Fiddle" - courtesy Codespaces</summary>
 
-Akin to a JSFiddle, Codespaces creates a complete executable environment with **zero install or configuration**.  The environment includes sample projects and databases - running in **VSCode *in your Browser*** - so you can test, debug and experiment with no risk.
+About this site:
+
+* *What:*  **Learn about JSON:API, Flask, and SQLAlchemy**
+
+* *Why:* a complement to conventional tutorials and docs, learn using a **complete executable environment**:
+
+    * Akin to a **JS Fiddle** - but here for a *complete environment:* running sample projects with live, updatable databases.
+
+    * **Test the JSON:API** on the live database, with Swagger, cURL and an Admin App. 
+    
+    * **Explore the project code** -- use the debugger, experiment with it.
+
+* *How:* the enabling technology is Codespaces.  It creates a cloud machine for these projects, and **starts VSCode in your Browser.**  This eliminates install, configuration, and risk to your local machine.
 
 </details fiddle>
 
@@ -382,15 +394,15 @@ Use the [```Detailed Tutorial```](./2.%20Learn%20JSON_API%20using%20API%20Logic%
 
 **JSON:APIs** are worth a look:
 
-* Standards eliminate complex and time-consuming design
-* Self-service APIs eliminate bottlenecks in backend development
+* **Eliminate design complexity and delays** with standards
+* **Eliminate bottlenecks** in backend development with Self-service APIs 
 
 **API Logic Server** creates JSON:API systems instantly:
 
-1. Use the `ApiLogicServer create` command to create a Flask/SQLAlchemy project from your database. Zero learning curve. Projects are **instantly executable**, providing:
+1.  **Instantly executable projects** with the `ApiLogicServer create` command, providing:
 
-    * **a JSON:API:** end points for each table, with filtering, sorting, pagination and related data access -- ready for custom app dev
-    * **an Admin App:** multi-page, multi-table apps -- ready for business user agile collaboration<br><br>
+    * **a JSON:API:** end point for each table -- multi-table, filtering, sorting, pagination... ready for custom app dev
+    * **an Admin App:** multi-page, multi-table apps... ready for business user agile collaboration<br><br>
 
 2. **Leverage Standard Tools** for development and deployment:
 
