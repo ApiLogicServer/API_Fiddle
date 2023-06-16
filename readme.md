@@ -76,6 +76,8 @@ This first app (_1. Learn Flask / SQLAlchemy_) illustrates a typical framework-b
 
 To run, use the Run Configuration, and test with `cURL`.  
 
+&nbsp;
+
 <details markdown>
 
 <summary>&nbsp;&nbsp;&nbsp;Show me how </summary>
@@ -100,6 +102,19 @@ To run the basic app:
 
 ![](https://github.com/ApiLogicServer/Docs/blob/main/docs/images/tutorial/1-basic-app.png?raw=true)
 
+</details>
+
+&nbsp;
+
+<details markdown>
+
+<summary>&nbsp;&nbsp;&nbsp;Explore the Code </summary>
+
+&nbsp;
+
+[**Open the readme**](./1.%20Learn%20APIs%20using%20Flask%20SqlAlchemy/readme.md) to understand Flask / SQLAlchemy usage
+
+    * The readme also provides brief background on APIs, Flask, and SQLAlchemy
 </details>
 
 &nbsp;
