@@ -182,68 +182,6 @@ Project 2 is much more like a real server.  It:
   *  JSON:APIs are **self-service**, with *consumer-defined* response inclusion
       * Similar to GraphQL, clients declare what data to include, rather than relying on pre-defined resources.<br><br>
 
-* Was **built using API Logic Server** --  an open source project providing:
-
-  * **Automatic Creation:** a single command creates the project from your database (including an Admin App)
-
-  * **Customize with your IDE:** declare spreadsheet-like **business logic rules**, and code extra API endpoints
-
-
-&nbsp;
-
-<details markdown>
-
-<summary>&nbsp;&nbsp;&nbsp;What is API Logic Server </summary>
-
-&nbsp;
-
-**What is Installed**
-
-API Logic server installs with `pip`, in a docker container, or (here) in codespaces.  As shown below, it consists of a:
-
-* **CLI:** the `ApiLogicServer create` command you saw above
-* **Runtime Packages:** for API, UI and Logic execution<br>
-
-![](https://apilogicserver.github.io/Docs/images/Architecture-What-Is.png)
-
-&nbsp;
-
-**Development Architecture**
-
-It operates as shown below:
-
-* A) Create your database as usual
-
-* B) Use the CLI to generate an executable project
-
-  * E.g.: `ApiLogicServer create --project_name=nw --db_url=nw-`
-
-  * The system reads your database to create an executable API Logic Project<br>
-&nbsp;
-
-* C) Customize and debug it in VSCode, PyCharm, etc.
-
-  * Declare logic, code new endpoints, customize the data model
-
-
-![](https://apilogicserver.github.io/Docs/images/creates-and-runs.png)
-
-&nbsp;
-
-**Standard, Scalable Modern Architecture**
-
-* A modern 3-tiered architecture, accessed by **APIs**
-* Logic is **automatically invoked**, operating as a SQLAlchemy event listener
-  * Observe logic is *automatic re-used* by web apps and custom services
-* **Containerized** for scalable cloud deployment - the project includes a dockerfile to containerize it to DockerHub.
-
-
-![API Logic Server Intro](https://apilogicserver.github.io/Docs/images/Architecture.png)
-
-</details what is api logic server>
-
-&nbsp;
-
 Let's &nbsp;  2.a) Start the Server, &nbsp; 2.b) Explore the JSON:API, &nbsp; and 2.c) Explore JSON:API Update Logic.
 
 &nbsp;
@@ -357,6 +295,7 @@ You can also make the endpoint **visible in swagger**.  Find the code `ServicesE
 </details what is json:api>
 
 &nbsp;
+
 <details markdown>
 
 <summary>&nbsp;&nbsp;&nbsp;2.c) Explore JSON:API Update Logic </summary>
@@ -405,6 +344,7 @@ We see the log of logic execution (note the **multi-table rule chaining**), and 
 
 Use the [```Detailed Tutorial```](./2.%20Learn%20JSON_API%20using%20API%20Logic%20Server/tutorial.md) to further explore this app.  
 
+
 &nbsp;
 
 <details markdown>
@@ -443,47 +383,6 @@ Use the [```Detailed Tutorial```](./2.%20Learn%20JSON_API%20using%20API%20Logic%
 
 <details markdown>
 
-&nbsp;
-
-**Try Creating New Projects**
-
-<details markdown>
-
-<summary>Creating New Projects</summary>
-
-&nbsp;
-
-As described above, you can create projects with a single command.  To help you explore, ApiLogicServer provides several pre-installed sqlite sample databases:
-
-```bash
-cd API_Fiddle
-
-ApiLogicServer create --db_url=sqlite:///sample_db.sqlite --project_name=nw
-
-# that's a bit of a mouthful, so abbreviations are provided for pre-included samples
-ApiLogicServer create --project_name=nw --db_url=nw-                       # same sample as 2, above
-ApiLogicServer create --project_name=chinook --db_url=chinook              # artists and albums
-ApiLogicServer create --project_name=classicmodels --db_url=classicmodels  # customers, orders
-ApiLogicServer create --project_name=todo --db_url=todo                    # 1 table database
-
-```
-Then, **restart** the server as above, using the pre-created Run Configuration for `Execute <new project>`.<br><br>
-
-> Next, try it on your own databases: if you have a database, you can have an API and an Admin app in minutes.
-
-&nbsp;
-
-<details markdown>
-
-<summary> SQLAlchemy url required for your own databases </summary>
-
-&nbsp;
-
-The system provides shorthand notations for the pre-installed sample databases above.  For your own databases, you will need to provide a SQLAlchemy URI for the `db_url` parameter.  These can be tricky - try `ApiLogicServer examples`, or, when all else fails, [try the docs](https://apilogicserver.github.io/Docs/Database-Connectivity/).
-
-</details url>
-
-</details new projects>
 
 &nbsp;
 
@@ -508,15 +407,119 @@ This tutorial is actually 2 independent projects.  When you create a project usi
 
 &nbsp;
 
+<details markdown>
+
+<summary>&nbsp;&nbsp;&nbsp;Automated Creation: Project, API, Admin, Logic </summary>
+
+&nbsp;
+
+This app was not coded by hand - it was **built using API Logic Server** --  an open source project providing:
+
+  * **Automatic Creation:** a single command creates the project from your database (including an Admin App)
+
+  * **Customize with your IDE:** declare spreadsheet-like **business logic rules**, and code extra API endpoints
+
+&nbsp;
+
+<details markdown>
+
+&nbsp;
+
+<summary>&nbsp;&nbsp;&nbsp;Explore Creating New Projects</summary>
+
+As described above, you can create projects with a single command.  To help you explore, ApiLogicServer provides several pre-installed sqlite sample databases:
+
+```bash
+cd API_Fiddle
+
+ApiLogicServer create --db_url=sqlite:///sample_db.sqlite --project_name=nw
+
+# that's a bit of a mouthful, so abbreviations are provided for pre-included samples
+ApiLogicServer create --project_name=nw --db_url=nw-                       # same sample as 2, above
+ApiLogicServer create --project_name=chinook --db_url=chinook              # artists and albums
+ApiLogicServer create --project_name=classicmodels --db_url=classicmodels  # customers, orders
+ApiLogicServer create --project_name=todo --db_url=todo                    # 1 table database
+
+```
+Then, **restart** the server as above, using the pre-created Run Configuration for `Execute <new project>`.<br><br>
+
+> Next, try it on your own databases: if you have a database, you can have an API and an Admin app in minutes.
+
+> Note:The system provides shorthand notations for the pre-installed sample databases above.  For your own databases, you will need to provide a SQLAlchemy URI for the `db_url` parameter.  These can be tricky - try `ApiLogicServer examples`, or, when all else fails, [try the docs](https://apilogicserver.github.io/Docs/Database-Connectivity/).
+
+</details new projects>
+
+&nbsp;
+
+<details markdown>
+
+&nbsp;
+
+<summary>&nbsp;&nbsp;&nbsp;What is API Logic Server</summary>
+
+
+**What is Installed**
+
+API Logic server installs with `pip`, in a docker container, or (here) in codespaces.  As shown below, it consists of a:
+
+* **CLI:** the `ApiLogicServer create` command you saw above
+* **Runtime Packages:** for API, UI and Logic execution<br>
+
+![](https://apilogicserver.github.io/Docs/images/Architecture-What-Is.png)
+
+&nbsp;
+
+**Development Architecture**
+
+It operates as shown below:
+
+* A) Create your database as usual
+
+* B) Use the CLI to generate an executable project
+
+  * E.g.: `ApiLogicServer create --project_name=nw --db_url=nw-`
+
+  * The system reads your database to create an executable API Logic Project<br>
+&nbsp;
+
+* C) Customize and debug it in VSCode, PyCharm, etc.
+
+  * Declare logic, code new endpoints, customize the data model
+
+
+![](https://apilogicserver.github.io/Docs/images/creates-and-runs.png)
+
+&nbsp;
+
+**Standard, Scalable Modern Architecture**
+
+* A modern 3-tiered architecture, accessed by **APIs**
+* Logic is **automatically invoked**, operating as a SQLAlchemy event listener
+  * Observe logic is *automatic re-used* by web apps and custom services
+* **Containerized** for scalable cloud deployment - the project includes a dockerfile to containerize it to DockerHub.
+
+
+![API Logic Server Intro](https://apilogicserver.github.io/Docs/images/Architecture.png)
+
+</details what is api logic server>
+
+</details automated creation>
+
+&nbsp;
+
+&nbsp;
+
 &nbsp;
 
 ---
 
 </details 2. JSON_API>
 
+
+
 &nbsp;
 
-<details markdown>
+<details markdown Automated Creation>
 
 <summary>Appendix: Key Technology Concepts Review</summary>
 
