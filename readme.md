@@ -177,6 +177,7 @@ Project 2 is much more like a real server.  It:
 
 * Implements a **JSON:API -- a standard definition** for filtering, sorting, pagination, and multi-table retrieval.
   * Such **standards eliminate complex and time-consuming design**
+      * (*Rest*, unlike SQL, does not dictate syntax)<br><br>
 
   *  JSON:APIs are **self-service**, with *consumer-defined* response inclusion
       * Similar to GraphQL, clients declare what data to include, rather than relying on pre-defined resources.<br><br>
@@ -274,6 +275,9 @@ Let's &nbsp;  2.a) Start the Server, &nbsp; 2.b) Explore the JSON:API, &nbsp; an
     * This opens the Admin App, which provides access to Swagger.
 
 ![](https://apilogicserver.github.io/Docs/images/tutorial/2-apilogicproject.png)
+
+![](https://apilogicserver.github.io/Docs/images/ui-admin/admin-home.png)
+
 
 </details run project>
 
