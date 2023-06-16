@@ -1,6 +1,5 @@
 # coding: utf-8
-from sqlalchemy import Column, ForeignKey, Integer, String, Table, Text
-from sqlalchemy.sql.sqltypes import NullType
+from sqlalchemy import Column, ForeignKey, Integer, String, Text
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 from flask import abort
@@ -16,12 +15,18 @@ from flask_jwt_extended import create_access_token
 # Alter this file per your database maintenance policy
 #    See https://apilogicserver.github.io/Docs/Project-Rebuild/#rebuilding
 #
+# Created:  June 15, 2023 12:04:28
+# Database: sqlite:////Users/val/dev/Org-ApiLogicServer/API_Fiddle/3. Logic/database/authentication_db.sqlite
+# Dialect:  sqlite
+#
 # mypy: ignore-errors
 
 from safrs import SAFRSBase
 from flask_login import UserMixin
 import safrs, flask_sqlalchemy
+from safrs import jsonapi_attr
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.sql.sqltypes import NullType
 
 db = SQLAlchemy() 
 Baseauthentication = declarative_base()  # type: flask_sqlalchemy.model.DefaultMeta
@@ -43,7 +48,20 @@ class Role(SAFRSBase, Baseauthentication, db.Model, UserMixin):  # type: ignore
     name = Column(String(64), primary_key=True)
     allow_client_generated_ids = True
 
-    UserRoleList = relationship('UserRole', cascade_backrefs=True, backref='Role')
+    UserRoleList = relationship('UserRole', cascade_backrefs=False, backref='Role')
+
+
+    @jsonapi_attr
+    def _check_sum_(self):  # type: ignore [no-redef]
+        return None if isinstance(self, flask_sqlalchemy.model.DefaultMeta) \
+            else self._check_sum_property if hasattr(self,"_check_sum_property") \
+                else None  # property does not exist during initialization
+
+    @_check_sum_.setter
+    def _check_sum_(self, value):  # type: ignore [no-redef]
+        self._check_sum_property = value
+
+    S_CheckSum = _check_sum_
 
 
 class User(SAFRSBase, Baseauthentication, db.Model, UserMixin):  # type: ignore
@@ -60,8 +78,8 @@ class User(SAFRSBase, Baseauthentication, db.Model, UserMixin):  # type: ignore
     password_hash = Column(String(200))
     allow_client_generated_ids = True
 
-    ApiList = relationship('Api', cascade_backrefs=True, backref='owner')
-    UserRoleList = relationship('UserRole', cascade_backrefs=True, backref='user')
+    ApiList = relationship('Api', cascade_backrefs=False, backref='owner')
+    UserRoleList = relationship('UserRole', cascade_backrefs=False, backref='user')
     
     # authentication-provider extension - password check
     def check_password(self, password=None):
@@ -90,11 +108,17 @@ class User(SAFRSBase, Baseauthentication, db.Model, UserMixin):  # type: ignore
         return { "access_token" : access_token}
 
 
-t_sqlite_sequence = Table(
-    'sqlite_sequence', metadata,
-    Column('name', NullType),
-    Column('seq', NullType)
-)
+    @jsonapi_attr
+    def _check_sum_(self):  # type: ignore [no-redef]
+        return None if isinstance(self, flask_sqlalchemy.model.DefaultMeta) \
+            else self._check_sum_property if hasattr(self,"_check_sum_property") \
+                else None  # property does not exist during initialization
+
+    @_check_sum_.setter
+    def _check_sum_(self, value):  # type: ignore [no-redef]
+        self._check_sum_property = value
+
+    S_CheckSum = _check_sum_
 
 
 class Api(SAFRSBase, Baseauthentication, db.Model, UserMixin):  # type: ignore
@@ -107,7 +131,20 @@ class Api(SAFRSBase, Baseauthentication, db.Model, UserMixin):  # type: ignore
     connection_string = Column(String(64))
     owner_id = Column(ForeignKey('User.id'))
 
-    # see backref on parent: owner = relationship('User', cascade_backrefs=True, backref='ApiList')
+    # see backref on parent: owner = relationship('User', cascade_backrefs=False, backref='ApiList')
+
+
+    @jsonapi_attr
+    def _check_sum_(self):  # type: ignore [no-redef]
+        return None if isinstance(self, flask_sqlalchemy.model.DefaultMeta) \
+            else self._check_sum_property if hasattr(self,"_check_sum_property") \
+                else None  # property does not exist during initialization
+
+    @_check_sum_.setter
+    def _check_sum_(self, value):  # type: ignore [no-redef]
+        self._check_sum_property = value
+
+    S_CheckSum = _check_sum_
 
 
 class UserRole(SAFRSBase, Baseauthentication, db.Model, UserMixin):  # type: ignore
@@ -120,5 +157,18 @@ class UserRole(SAFRSBase, Baseauthentication, db.Model, UserMixin):  # type: ign
     role_name = Column(ForeignKey('Role.name'), primary_key=True)
     allow_client_generated_ids = True
 
-    # see backref on parent: Role = relationship('Role', cascade_backrefs=True, backref='UserRoleList')
-    # see backref on parent: user = relationship('User', cascade_backrefs=True, backref='UserRoleList')
+    # see backref on parent: Role = relationship('Role', cascade_backrefs=False, backref='UserRoleList')
+    # see backref on parent: user = relationship('User', cascade_backrefs=False, backref='UserRoleList')
+
+
+    @jsonapi_attr
+    def _check_sum_(self):  # type: ignore [no-redef]
+        return None if isinstance(self, flask_sqlalchemy.model.DefaultMeta) \
+            else self._check_sum_property if hasattr(self,"_check_sum_property") \
+                else None  # property does not exist during initialization
+
+    @_check_sum_.setter
+    def _check_sum_(self, value):  # type: ignore [no-redef]
+        self._check_sum_property = value
+
+    S_CheckSum = _check_sum_

@@ -4,7 +4,9 @@ from logic_bank.exec_row_logic.logic_row import LogicRow
 from logic_bank.extensions.rule_extensions import RuleExtension
 from logic_bank.logic_bank import Rule
 from database import models
+import api.system.opt_locking.opt_locking as opt_locking
 import logging
+
 
 preferred_approach = True
 """ Some examples below contrast a preferred approach with a more manual one """
@@ -147,7 +149,7 @@ def declare_logic():
 
 
     """
-        Simple constraint for error testing 
+        Simple constraints for error testing 
     """
     Rule.constraint(validate=models.Customer,
         as_condition=lambda row: row.CompanyName != 'x',
@@ -156,6 +158,16 @@ def declare_logic():
     Rule.constraint(validate=models.Employee,
         as_condition=lambda row: row.LastName != 'x',
         error_msg="LastName cannot be 'x'")
+    
+    def valid_category_description(row: models.Category, old_row: models.Category, logic_row: LogicRow):
+        if logic_row.ins_upd_dlt == "upd":
+            return row.Description != 'x'
+        else:
+            return True
+    Rule.constraint(validate=models.Category,
+                    calling=valid_category_description,
+                    error_msg="{row.Description} cannot be 'x'")
+
 
     """
         More complex rules follow - see: 
@@ -185,6 +197,7 @@ def declare_logic():
 
     Rule.count(derive=models.Order.OrderDetailCount, as_count_of=models.OrderDetail)
 
+
     """
         STATE TRANSITION LOGIC, using old_row
     """
@@ -196,6 +209,7 @@ def declare_logic():
     Rule.constraint(validate=models.Employee,
                     calling=raise_over_20_percent,
                     error_msg="{row.LastName} needs a more meaningful raise")
+
 
     """
         EXTEND RULE TYPES 
@@ -227,11 +241,26 @@ def declare_logic():
                                     which_children=which)
     Rule.row_event(on_class=models.Order, calling=clone_order)
 
-    def handle_all(logic_row: LogicRow):  # TIME / DATE STAMPING
-        row = logic_row.row
-        if logic_row.ins_upd_dlt == "ins" and hasattr(row, "CreatedOn"):
-            row.CreatedOn = datetime.datetime.now()
-            logic_row.log("early_row_event_all_classes - handle_all sets 'Created_on"'')
+
+    def handle_all(logic_row: LogicRow):  # OPTIMISTIC LOCKING, [TIME / DATE STAMPING]
+        """
+        This is generic - executed for all classes.
+
+        Invokes optimistic locking.
+
+        You can optionally do time and date stamping here, as shown below.
+
+        Args:
+            logic_row (LogicRow): from LogicBank - old/new row, state
+        """
+        if logic_row.is_updated() and logic_row.old_row is not None and logic_row.nest_level == 0:
+            opt_locking.opt_lock_patch(logic_row=logic_row)
+        enable_creation_stamping = True  # CreatedOn time stamping
+        if enable_creation_stamping:
+            row = logic_row.row
+            if logic_row.ins_upd_dlt == "ins" and hasattr(row, "CreatedOn"):
+                row.CreatedOn = datetime.datetime.now()
+                logic_row.log("early_row_event_all_classes - handle_all sets 'Created_on"'')
     Rule.early_row_event_all_classes(early_row_event_all_classes=handle_all)
     
     app_logger.debug("..logic/declare_logic.py (logic == rules + code)")

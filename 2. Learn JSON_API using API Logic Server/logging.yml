@@ -36,8 +36,28 @@ loggers:
         handlers: [console]
         propagate: no
 
+    engine_logger:
+#        level: DEBUG
+        handlers: [console]
+        propagate: no
+
+    api_logic_server_app:
+        level: INFO
+        handlers: [console]
+        propagate: no
+
     safrs:
         level: DEBUG
+        handlers: [console]
+        propagate: no
+
+    sqlalchemy.engine:
+#        level: DEBUG
+        handlers: [console]
+        propagate: no
+
+    api.system.opt_locking:
+        level: INFO
         handlers: [console]
         propagate: no
 
@@ -73,5 +93,10 @@ loggers:
 
     ui.admin.admin_loader:   
 #        level: DEBUG
+        handlers: [console]
+        propagate: no
+
+    util:   
+        level: INFO
         handlers: [console]
         propagate: no
