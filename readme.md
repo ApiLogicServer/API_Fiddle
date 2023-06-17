@@ -283,7 +283,7 @@ You can paste the `Customer` response into tools like [jsongrid](https://jsongri
 
 &nbsp;
 
-Servers often include non-JSON:API endpoints, such as the Order service to post an Order and its OrderDetails.
+Servers often include non-JSON:API endpoints, such as the `ServicesEndPoint - add_order` to post an Order and its OrderDetails.
 
 &nbsp;
 
@@ -299,7 +299,7 @@ Servers often include non-JSON:API endpoints, such as the Order service to post 
 
 <details markdown>
 
-<summary>&nbsp;&nbsp;&nbsp;2.c) Explore JSON:API Update Logic </summary>
+<summary>&nbsp;&nbsp;&nbsp;2.c) Explore JSON:API Patch Logic </summary>
 
 &nbsp;
 
@@ -339,6 +339,8 @@ We see that it fails - as it *should*.  Note this is a non-trivial ***muti-table
 
 &nbsp;
 
+> You might want to close _2.c) Explore JSON:API Patch Logic_, above.
+
 </details explore api logic server>
 
 &nbsp;
@@ -351,7 +353,7 @@ We see that it fails - as it *should*.  Note this is a non-trivial ***muti-table
 
 You could code all this using Flask and SQLAlchemy... but it would *take a **long** time*.
 
-In fact, this app was not coded by hand - it was **built using API Logic Server** --  an open source project providing:
+In fact, this system was not coded by hand - it was **created using API Logic Server** --  an open source project providing:
 
   * **Automatic Creation:** a single command creates the project from your database: SQLAlchemy Models, API, and the Admin App
 
@@ -446,7 +448,7 @@ Then, **restart** the server as above, using the pre-created Run Configuration f
 
 &nbsp;
 
-<summary>&nbsp;&nbsp;&nbsp;Appendix: What is API Logic Server</summary>
+<summary>Appendix: What is API Logic Server</summary>
 
 
 **What is Installed**
