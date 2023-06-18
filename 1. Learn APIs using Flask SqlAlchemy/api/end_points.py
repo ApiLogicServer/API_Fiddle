@@ -26,7 +26,7 @@ def row2dict(row):
     mapper = inspect(row.__class__).mapper  
     return {
         c.key: str(getattr(row, c.key))
-            for c in mapper.attrs  # for c in row.__table__.columns
+            for c in mapper.attrs  # not: for c in row.__table__.columns
     }    
 
 
