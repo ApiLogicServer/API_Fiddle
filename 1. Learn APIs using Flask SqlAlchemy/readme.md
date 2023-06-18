@@ -170,6 +170,9 @@ In your handler, you may need to read or write database data.  You can use raw S
 
 * simplified **access to related data** (e.g., a simple way to get the OrderDetails for an Order)
 
+* **custom naming** - independent of database table/columns
+    * See `Category`, `Order.ShipZip`<br><br>
+
 * other services, such as support for type hierarchies
 
 There are 2 common aspects for using an ORM:

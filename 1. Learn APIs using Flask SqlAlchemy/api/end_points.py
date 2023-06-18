@@ -2,13 +2,32 @@ import logging
 from flask import request, jsonify
 from database import models
 import util
+from sqlalchemy import inspect
 
 
 def row2dict(row):
+    """
+
+    Get dict for row.
+
+    Note mapped rows have different entity/attribute names than tables/columns.
+
+    * see Category, Order.ShipZip
+
+    https://docs.sqlalchemy.org/en/20/orm/mapping_styles.html#inspection-of-mapped-instances
+
+    Args:
+        row (_type_): row instance (mapped object)
+
+    Returns:
+        _type_: dict of attr names/values
+    """
+
+    mapper = inspect(row.__class__).mapper  
     return {
-        c.name: str(getattr(row, c.name))
-            for c in row.__table__.columns
-    }
+        c.key: str(getattr(row, c.key))
+            for c in mapper.attrs  # for c in row.__table__.columns
+    }    
 
 
 def flask_events(app, db):
