@@ -8,7 +8,7 @@ from sqlalchemy import inspect
 def row2dict(row):
     """
 
-    Get dict for row.
+    Get dict for mapped row.
 
     Note mapped rows are *logical*, not physical db table/column names.
 
