@@ -7,7 +7,7 @@ import util
 def row2dict(row):
     return {
         c.name: str(getattr(row, c.name))
-        for c in row.__table__.columns
+            for c in row.__table__.columns
     }
 
 
@@ -37,7 +37,7 @@ def flask_events(app, db):
     @app.route('/order', methods=['GET'])  # tell Flask: call this function when /order request occurs
     def order():
         """
-        End point to return a nested result set response
+        End point to return a nested result set response, from related database rows
 
         Illustrates:
         1. Obtain URL argument from Flask
