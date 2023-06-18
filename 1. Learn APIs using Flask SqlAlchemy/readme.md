@@ -114,7 +114,7 @@ curl -X GET "http://localhost:8080/order?Id=10643"
   "ShipCity": "Berlin",
   "ShipCountry": "Germany",
   "ShipName": "Alfreds Futterkiste",
-  "ShipPostalCode": "12209",
+  "ShipZip": "12209",
   "ShipRegion": "Western Europe",
   "ShipVia": "1",
   "ShippedDate": "None"
