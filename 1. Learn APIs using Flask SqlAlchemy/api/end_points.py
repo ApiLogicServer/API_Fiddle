@@ -8,13 +8,13 @@ from sqlalchemy import inspect
 def row2dict(row):
     """
 
-    Get dict for mapped row.
+    Get dict for row.
 
     Note mapped rows are *logical*, not physical db table/column names.
 
     * see Category, Order.ShipZip
 
-    * https://docs.sqlalchemy.org/en/20/orm/mapping_styles.html#inspection-of-mapped-instances
+    https://docs.sqlalchemy.org/en/20/orm/mapping_styles.html#inspection-of-mapped-instances
 
     Args:
         row (_type_): row instance (mapped object)

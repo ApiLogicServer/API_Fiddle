@@ -10,7 +10,7 @@ from sqlalchemy.ext.declarative import declarative_base
 # Alter this file per your database maintenance policy
 #    See https://apilogicserver.github.io/Docs/Project-Rebuild/#rebuilding
 #
-# Created:  June 18, 2023 14:09:17
+# Created:  June 18, 2023 19:34:23
 # Database: sqlite:////Users/val/dev/Org-ApiLogicServer/API_Fiddle/1. Instant_Creation/database/db.sqlite
 # Dialect:  sqlite
 #
@@ -41,7 +41,7 @@ class Category(SAFRSBase, Base):
     __bind_key__ = 'None'
 
     Id = Column(Integer, primary_key=True)
-    CategoryName = Column(String(8000))
+    CategoryName = Column('CategoryName_ColumnName', String(8000))  # manual fix - alias
     Description = Column(String(8000))
     Client_id = Column(Integer)
 
