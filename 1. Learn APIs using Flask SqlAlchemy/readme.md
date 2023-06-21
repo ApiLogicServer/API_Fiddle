@@ -20,7 +20,7 @@ Most database applications require networked database access.  You simply cannot
 
 ## RESTful APIs: Leverage HTTP, JSON
 
-REST has emerged as a loose standard for APIs, by leveraging 2 key elements:
+REST has emerged as a loose standard for APIs, by leveraging 2 key technology elements:
 
 * **HTTP protocol:**  Web Browsers utilize this, invoking `Get` commands to obtain `html` responses, but HTTP is far more extensive as shown in the table below.
 
@@ -161,9 +161,9 @@ A framework is a "your code goes here" library, providing backend functions to h
 A popular framework in Python is ***Flask***, illustrated in this application.  Basically:
 
 ```python
-    @app.route('/order', methods=['GET'])  # tell Flask: call this function when /order request occurs
+    @app.route('/order', methods=['GET'])  # Tell Flask: call this on order request
     def order():
-        order_id = request.args.get('Id')  # 1. Obtain URL argument from Flask
+        order_id = request.args.get('Id')  # Obtain URL argument from Flask
 ```
 
 &nbsp;
