@@ -10,7 +10,7 @@ from sqlalchemy.ext.declarative import declarative_base
 # Alter this file per your database maintenance policy
 #    See https://apilogicserver.github.io/Docs/Project-Rebuild/#rebuilding
 #
-# Created:  June 19, 2023 19:27:25
+# Created:  June 20, 2023 17:02:18
 # Database: sqlite:////Users/val/dev/Org-ApiLogicServer/API_Fiddle/1. Instant_Creation/database/db.sqlite
 # Dialect:  sqlite
 #
@@ -41,7 +41,7 @@ class Category(SAFRSBase, Base):
     __bind_key__ = 'None'
 
     Id = Column(Integer, primary_key=True)
-    CategoryName_ColumnName = Column(String(8000))
+    CategoryName = Column('CategoryName_ColumnName', String(8000))  # manual fix - alias
     Description = Column(String(8000))
     Client_id = Column(Integer)
 
@@ -485,7 +485,7 @@ class Order(SAFRSBase, Base):
     ShipAddress = Column(String(8000))
     ShipCity = Column(String(8000))
     ShipRegion = Column(String(8000))
-    ShipPostalCode = Column(String(8000))
+    ShipZip = Column('ShipPostalCode', String(8000))  # manual fix - alias
     ShipCountry = Column(String(8000))
     AmountTotal = Column(DECIMAL(10, 2))
     Country = Column(String(50))
@@ -500,7 +500,7 @@ class Order(SAFRSBase, Base):
     # see backref on parent: Employee = relationship('Employee', cascade_backrefs=False, backref='OrderList')
 
     parent = relationship('Order', remote_side=[Id], cascade_backrefs=False, backref='OrderList')  # special handling for self-relationships
-    OrderDetailList = relationship('OrderDetail', cascade_backrefs=False, backref='Order')
+    OrderDetailList = relationship('OrderDetail', cascade='all, delete', cascade_backrefs=False, backref='Order')  # manual fix
 
 
     @jsonapi_attr
