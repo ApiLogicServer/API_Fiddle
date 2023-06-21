@@ -224,7 +224,7 @@ Long before you use the Flask/SQLAlchemy tools, you need to create project struc
 
 There are also important devops artifacts:
 
-* `.devcontainer/` - files here enable your project to be run in docker images, and to package your application as an image
+* `.devcontainer/` - files here enable your project to be run in docker images (including Codespaces), and to package your application as an image for production deployment
 
 * `config.py` - use this to set up key configuration parameters, including code to override them with environment variables
 
