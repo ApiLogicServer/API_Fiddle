@@ -183,9 +183,28 @@ In your handler, you may need to read or write database data.  You can use raw S
 
 There are 2 basic elements for using an ORM:
 
-* provide **data model classes** - these are used to read/write data, and can also be used to create / update the database structure (add tables and columns)
+* provide **data model classes** - these are used to read/write data, and can also be used to create / update the database structure (add tables and columns).  See `database/models.py`:
 
-* use **data access** - verbs to read/write data
+
+```python
+class Customer(Base):
+  __tablename__ = 'Customer'
+  _s_collection_name = 'Customer'
+  __bind_key__ = 'None'
+
+  Id = Column(String(8000), primary_key=True)
+  CompanyName = Column(String(8000))
+
+  OrderList = relationship('Order', cascade_backrefs=False, backref='Customer')
+```
+
+
+* use **data access** - verbs to read/write data.  See `api/end_points.py`:
+
+```python
+  order = db.session.query(models.Order).filter(models.Order.Id == order_id).one()
+  for each_order_detail in order.OrderDetailList:  # SQLAlchemy related data access
+```
 
 ---
 
