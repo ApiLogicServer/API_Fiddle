@@ -3,25 +3,28 @@ from sqlalchemy import Boolean, Column, DECIMAL, Date, Double, ForeignKey, Forei
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 
-
 ########################################################################################################################
 # Classes describing database for SqlAlchemy ORM, initially created by schema introspection.
 #
 # Alter this file per your database maintenance policy
 #    See https://apilogicserver.github.io/Docs/Project-Rebuild/#rebuilding
 #
-# Created:  June 20, 2023 17:02:18
-# Database: sqlite:////Users/val/dev/Org-ApiLogicServer/API_Fiddle/1. Instant_Creation/database/db.sqlite
+# Created:  July 04, 2023 19:06:59
+# Database: sqlite:////Users/val/dev/ApiLogicServer/ApiLogicServer-dev/org_git/API_Fiddle/1. Instant_Creation/database/db.sqlite
 # Dialect:  sqlite
 #
 # mypy: ignore-errors
+########################################################################################################################
 
 from safrs import SAFRSBase
 from flask_login import UserMixin
 import safrs, flask_sqlalchemy
 from safrs import jsonapi_attr
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.orm import relationship
+from sqlalchemy.orm import Mapped
 from sqlalchemy.sql.sqltypes import NullType
+from typing import List
 
 db = SQLAlchemy() 
 Base = declarative_base()  # type: flask_sqlalchemy.model.DefaultMeta
@@ -31,7 +34,6 @@ metadata = Base.metadata
 #TIMESTAMP= db.TIMESTAMP
 
 from sqlalchemy.dialects.sqlite import *
-########################################################################################################################
 
 
 
@@ -45,6 +47,9 @@ class Category(SAFRSBase, Base):
     Description = Column(String(8000))
     Client_id = Column(Integer)
 
+    # parent relationships (access parent)
+
+    # child relationships (access children)
 
     @jsonapi_attr
     def _check_sum_(self):  # type: ignore [no-redef]
@@ -75,15 +80,17 @@ class Customer(SAFRSBase, Base):
     Country = Column(String(8000))
     Phone = Column(String(8000))
     Fax = Column(String(8000))
-    Balance = Column(DECIMAL)
-    CreditLimit = Column(DECIMAL)
+    Balance : DECIMAL = Column(DECIMAL)
+    CreditLimit : DECIMAL = Column(DECIMAL)
     OrderCount = Column(Integer, server_default=text("0"))
     UnpaidOrderCount = Column(Integer, server_default=text("0"))
     Client_id = Column(Integer)
     allow_client_generated_ids = True
 
-    OrderList = relationship('Order', cascade_backrefs=False, backref='Customer')
+    # parent relationships (access parent)
 
+    # child relationships (access children)
+    OrderList : Mapped[List["Order"]] = relationship(back_populates="Customer")
 
     @jsonapi_attr
     def _check_sum_(self):  # type: ignore [no-redef]
@@ -107,6 +114,9 @@ class CustomerDemographic(SAFRSBase, Base):
     CustomerDesc = Column(String(8000))
     allow_client_generated_ids = True
 
+    # parent relationships (access parent)
+
+    # child relationships (access children)
 
     @jsonapi_attr
     def _check_sum_(self):  # type: ignore [no-redef]
@@ -130,12 +140,13 @@ class Department(SAFRSBase, Base):
     DepartmentId = Column(ForeignKey('Department.Id'))
     DepartmentName = Column(String(100))
 
-    # see backref on parent: Department = relationship('Department', remote_side=[Id], cascade_backrefs=False, backref='DepartmentList')
+    # parent relationships (access parent)
+    Department : Mapped["Department"] = relationship(remote_side=[Id], back_populates=("DepartmentList"))
 
-    Department = relationship('Department', remote_side=[Id], cascade_backrefs=False, backref='DepartmentList')  # special handling for self-relationships
-    EmployeeList = relationship('Employee', primaryjoin='Employee.OnLoanDepartmentId == Department.Id', cascade_backrefs=False, backref='Department')
-    EmployeeList1 = relationship('Employee', primaryjoin='Employee.WorksForDepartmentId == Department.Id', cascade_backrefs=False, backref='Department1')
-
+    # child relationships (access children)
+    DepartmentList : Mapped[List["Department"]] = relationship(back_populates="Department")
+    EmployeeList : Mapped[List["Employee"]] = relationship(foreign_keys='[Employee.OnLoanDepartmentId]', back_populates="Department")
+    EmployeeList1 : Mapped[List["Employee"]] = relationship(foreign_keys='[Employee.WorksForDepartmentId]', back_populates="Department1")
 
     @jsonapi_attr
     def _check_sum_(self):  # type: ignore [no-redef]
@@ -160,8 +171,10 @@ class Location(SAFRSBase, Base):
     notes = Column(String(256))
     allow_client_generated_ids = True
 
-    OrderList = relationship('Order', cascade_backrefs=False, backref='Location')
+    # parent relationships (access parent)
 
+    # child relationships (access children)
+    OrderList : Mapped[List["Order"]] = relationship(back_populates="Location")
 
     @jsonapi_attr
     def _check_sum_(self):  # type: ignore [no-redef]
@@ -186,15 +199,17 @@ class Product(SAFRSBase, Base):
     SupplierId = Column(Integer, nullable=False)
     CategoryId = Column(Integer, nullable=False)
     QuantityPerUnit = Column(String(8000))
-    UnitPrice = Column(DECIMAL, nullable=False)
+    UnitPrice : DECIMAL = Column(DECIMAL, nullable=False)
     UnitsInStock = Column(Integer, nullable=False)
     UnitsOnOrder = Column(Integer, nullable=False)
     ReorderLevel = Column(Integer, nullable=False)
     Discontinued = Column(Integer, nullable=False)
     UnitsShipped = Column(Integer)
 
-    OrderDetailList = relationship('OrderDetail', cascade_backrefs=False, backref='Product')
+    # parent relationships (access parent)
 
+    # child relationships (access children)
+    OrderDetailList : Mapped[List["OrderDetail"]] = relationship(back_populates="Product")
 
     @jsonapi_attr
     def _check_sum_(self):  # type: ignore [no-redef]
@@ -217,6 +232,9 @@ class Region(SAFRSBase, Base):
     Id = Column(Integer, primary_key=True)
     RegionDescription = Column(String(8000))
 
+    # parent relationships (access parent)
+
+    # child relationships (access children)
 
     @jsonapi_attr
     def _check_sum_(self):  # type: ignore [no-redef]
@@ -239,6 +257,9 @@ class SampleDBVersion(SAFRSBase, Base):
     Id = Column(Integer, primary_key=True)
     Notes = Column(String(800))
 
+    # parent relationships (access parent)
+
+    # child relationships (access children)
 
     @jsonapi_attr
     def _check_sum_(self):  # type: ignore [no-redef]
@@ -262,6 +283,9 @@ class Shipper(SAFRSBase, Base):
     CompanyName = Column(String(8000))
     Phone = Column(String(8000))
 
+    # parent relationships (access parent)
+
+    # child relationships (access children)
 
     @jsonapi_attr
     def _check_sum_(self):  # type: ignore [no-redef]
@@ -294,6 +318,9 @@ class Supplier(SAFRSBase, Base):
     Fax = Column(String(8000))
     HomePage = Column(String(8000))
 
+    # parent relationships (access parent)
+
+    # child relationships (access children)
 
     @jsonapi_attr
     def _check_sum_(self):  # type: ignore [no-redef]
@@ -318,8 +345,10 @@ class Territory(SAFRSBase, Base):
     RegionId = Column(Integer, nullable=False)
     allow_client_generated_ids = True
 
-    EmployeeTerritoryList = relationship('EmployeeTerritory', cascade_backrefs=False, backref='Territory')
+    # parent relationships (access parent)
 
+    # child relationships (access children)
+    EmployeeTerritoryList : Mapped[List["EmployeeTerritory"]] = relationship(back_populates="Territory")
 
     @jsonapi_attr
     def _check_sum_(self):  # type: ignore [no-redef]
@@ -342,8 +371,10 @@ class Union(SAFRSBase, Base):
     Id = Column(Integer, primary_key=True)
     Name = Column(String(80))
 
-    EmployeeList = relationship('Employee', cascade_backrefs=False, backref='Union')
+    # parent relationships (access parent)
 
+    # child relationships (access children)
+    EmployeeList : Mapped[List["Employee"]] = relationship(back_populates="Union")
 
     @jsonapi_attr
     def _check_sum_(self):  # type: ignore [no-redef]
@@ -381,20 +412,21 @@ class Employee(SAFRSBase, Base):
     ReportsTo = Column(Integer, index=True)
     PhotoPath = Column(String(8000))
     EmployeeType = Column(String(16), server_default=text("Salaried"))
-    Salary = Column(DECIMAL)
+    Salary : DECIMAL = Column(DECIMAL)
     WorksForDepartmentId = Column(ForeignKey('Department.Id'))
     OnLoanDepartmentId = Column(ForeignKey('Department.Id'))
     UnionId = Column(ForeignKey('Union.Id'))
-    Dues = Column(DECIMAL)
+    Dues : DECIMAL = Column(DECIMAL)
 
-    # see backref on parent: Department = relationship('Department', primaryjoin='Employee.OnLoanDepartmentId == Department.Id', cascade_backrefs=False, backref='EmployeeList')
-    # see backref on parent: Union = relationship('Union', cascade_backrefs=False, backref='EmployeeList')
-    # see backref on parent: Department1 = relationship('Department', primaryjoin='Employee.WorksForDepartmentId == Department.Id', cascade_backrefs=False, backref='EmployeeList_Department1')
+    # parent relationships (access parent)
+    Department : Mapped["Department"] = relationship(foreign_keys='[Employee.OnLoanDepartmentId]', back_populates=("EmployeeList"))
+    Union : Mapped["Union"] = relationship(back_populates=("EmployeeList"))
+    Department1 : Mapped["Department"] = relationship(foreign_keys='[Employee.WorksForDepartmentId]', back_populates=("EmployeeList1"))
 
-    EmployeeAuditList = relationship('EmployeeAudit', cascade_backrefs=False, backref='Employee')
-    EmployeeTerritoryList = relationship('EmployeeTerritory', cascade_backrefs=False, backref='Employee')
-    OrderList = relationship('Order', cascade_backrefs=False, backref='Employee')
-
+    # child relationships (access children)
+    EmployeeAuditList : Mapped[List["EmployeeAudit"]] = relationship(back_populates="Employee")
+    EmployeeTerritoryList : Mapped[List["EmployeeTerritory"]] = relationship(back_populates="Employee")
+    OrderList : Mapped[List["Order"]] = relationship(back_populates="Employee")
 
     @jsonapi_attr
     def _check_sum_(self):  # type: ignore [no-redef]
@@ -416,14 +448,16 @@ class EmployeeAudit(SAFRSBase, Base):
 
     Id = Column(Integer, primary_key=True)
     Title = Column(String)
-    Salary = Column(DECIMAL)
+    Salary : DECIMAL = Column(DECIMAL)
     LastName = Column(String)
     FirstName = Column(String)
     EmployeeId = Column(ForeignKey('Employee.Id'))
     CreatedOn = Column(Text)
 
-    # see backref on parent: Employee = relationship('Employee', cascade_backrefs=False, backref='EmployeeAuditList')
+    # parent relationships (access parent)
+    Employee : Mapped["Employee"] = relationship(back_populates=("EmployeeAuditList"))
 
+    # child relationships (access children)
 
     @jsonapi_attr
     def _check_sum_(self):  # type: ignore [no-redef]
@@ -448,9 +482,11 @@ class EmployeeTerritory(SAFRSBase, Base):
     TerritoryId = Column(ForeignKey('Territory.Id'))
     allow_client_generated_ids = True
 
-    # see backref on parent: Employee = relationship('Employee', cascade_backrefs=False, backref='EmployeeTerritoryList')
-    # see backref on parent: Territory = relationship('Territory', cascade_backrefs=False, backref='EmployeeTerritoryList')
+    # parent relationships (access parent)
+    Employee : Mapped["Employee"] = relationship(back_populates=("EmployeeTerritoryList"))
+    Territory : Mapped["Territory"] = relationship(back_populates=("EmployeeTerritoryList"))
 
+    # child relationships (access children)
 
     @jsonapi_attr
     def _check_sum_(self):  # type: ignore [no-redef]
@@ -480,28 +516,29 @@ class Order(SAFRSBase, Base):
     RequiredDate = Column(Date)
     ShippedDate = Column(String(8000))
     ShipVia = Column(Integer)
-    Freight = Column(DECIMAL, server_default=text("0"))
+    Freight : DECIMAL = Column(DECIMAL, server_default=text("0"))
     ShipName = Column(String(8000))
     ShipAddress = Column(String(8000))
     ShipCity = Column(String(8000))
     ShipRegion = Column(String(8000))
     ShipZip = Column('ShipPostalCode', String(8000))  # manual fix - alias
     ShipCountry = Column(String(8000))
-    AmountTotal = Column(DECIMAL(10, 2))
+    AmountTotal : DECIMAL = Column(DECIMAL(10, 2))
     Country = Column(String(50))
     City = Column(String(50))
     Ready = Column(Boolean, server_default=text("TRUE"))
     OrderDetailCount = Column(Integer, server_default=text("0"))
     CloneFromOrder = Column(ForeignKey('Order.Id'))
 
-    # see backref on parent: parent = relationship('Order', remote_side=[Id], cascade_backrefs=False, backref='OrderList')
-    # see backref on parent: Location = relationship('Location', cascade_backrefs=False, backref='OrderList')
-    # see backref on parent: Customer = relationship('Customer', cascade_backrefs=False, backref='OrderList')
-    # see backref on parent: Employee = relationship('Employee', cascade_backrefs=False, backref='OrderList')
+    # parent relationships (access parent)
+    Order : Mapped["Order"] = relationship(remote_side=[Id], back_populates=("OrderList"))
+    Location : Mapped["Location"] = relationship(back_populates=("OrderList"))
+    Customer : Mapped["Customer"] = relationship(back_populates=("OrderList"))
+    Employee : Mapped["Employee"] = relationship(back_populates=("OrderList"))
 
-    parent = relationship('Order', remote_side=[Id], cascade_backrefs=False, backref='OrderList')  # special handling for self-relationships
-    OrderDetailList = relationship('OrderDetail', cascade='all, delete', cascade_backrefs=False, backref='Order')  # manual fix
-
+    # child relationships (access children)
+    OrderList : Mapped[List["Order"]] = relationship(back_populates="Order")
+    OrderDetailList : Mapped[List["OrderDetail"]] = relationship(cascade="all, delete", back_populates="Order")  # manual fix
 
     @jsonapi_attr
     def _check_sum_(self):  # type: ignore [no-redef]
@@ -524,15 +561,17 @@ class OrderDetail(SAFRSBase, Base):
     Id = Column(Integer, primary_key=True)
     OrderId = Column(ForeignKey('Order.Id'), nullable=False, index=True)
     ProductId = Column(ForeignKey('Product.Id'), nullable=False, index=True)
-    UnitPrice = Column(DECIMAL)
+    UnitPrice : DECIMAL = Column(DECIMAL)
     Quantity = Column(Integer, server_default=text("1"), nullable=False)
     Discount = Column(Double, server_default=text("0"))
-    Amount = Column(DECIMAL)
+    Amount : DECIMAL = Column(DECIMAL)
     ShippedDate = Column(String(8000))
 
-    # see backref on parent: Order = relationship('Order', cascade_backrefs=False, backref='OrderDetailList')
-    # see backref on parent: Product = relationship('Product', cascade_backrefs=False, backref='OrderDetailList')
+    # parent relationships (access parent)
+    Order : Mapped["Order"] = relationship(back_populates=("OrderDetailList"))
+    Product : Mapped["Product"] = relationship(back_populates=("OrderDetailList"))
 
+    # child relationships (access children)
 
     @jsonapi_attr
     def _check_sum_(self):  # type: ignore [no-redef]

@@ -8,25 +8,28 @@ from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import create_refresh_token
 from flask_jwt_extended import create_access_token
 
-
 ########################################################################################################################
 # Classes describing database for SqlAlchemy ORM, initially created by schema introspection.
 #
 # Alter this file per your database maintenance policy
 #    See https://apilogicserver.github.io/Docs/Project-Rebuild/#rebuilding
 #
-# Created:  June 20, 2023 17:02:20
-# Database: sqlite:////Users/val/dev/Org-ApiLogicServer/API_Fiddle/3. Logic/database/authentication_db.sqlite
+# Created:  July 04, 2023 19:06:59
+# Database: sqlite:////Users/val/dev/ApiLogicServer/ApiLogicServer-dev/org_git/API_Fiddle/3. Logic/database/authentication_db.sqlite
 # Dialect:  sqlite
 #
 # mypy: ignore-errors
+########################################################################################################################
 
 from safrs import SAFRSBase
 from flask_login import UserMixin
 import safrs, flask_sqlalchemy
 from safrs import jsonapi_attr
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.orm import relationship
+from sqlalchemy.orm import Mapped
 from sqlalchemy.sql.sqltypes import NullType
+from typing import List
 
 db = SQLAlchemy() 
 Baseauthentication = declarative_base()  # type: flask_sqlalchemy.model.DefaultMeta
@@ -36,7 +39,6 @@ metadata = Baseauthentication.metadata
 #TIMESTAMP= db.TIMESTAMP
 
 from sqlalchemy.dialects.sqlite import *
-########################################################################################################################
 
 
 
@@ -48,8 +50,10 @@ class Role(SAFRSBase, Baseauthentication, db.Model, UserMixin):  # type: ignore
     name = Column(String(64), primary_key=True)
     allow_client_generated_ids = True
 
-    UserRoleList = relationship('UserRole', cascade_backrefs=False, backref='Role')
+    # parent relationships (access parent)
 
+    # child relationships (access children)
+    UserRoleList : Mapped[List["UserRole"]] = relationship(back_populates="Role")
 
     @jsonapi_attr
     def _check_sum_(self):  # type: ignore [no-redef]
@@ -78,8 +82,11 @@ class User(SAFRSBase, Baseauthentication, db.Model, UserMixin):  # type: ignore
     password_hash = Column(String(200))
     allow_client_generated_ids = True
 
-    ApiList = relationship('Api', cascade_backrefs=False, backref='owner')
-    UserRoleList = relationship('UserRole', cascade_backrefs=False, backref='user')
+    # parent relationships (access parent)
+
+    # child relationships (access children)
+    ApiList : Mapped[List["Api"]] = relationship(back_populates="owner")
+    UserRoleList : Mapped[List["UserRole"]] = relationship(back_populates="user")
     
     # authentication-provider extension - password check
     def check_password(self, password=None):
@@ -107,7 +114,6 @@ class User(SAFRSBase, Baseauthentication, db.Model, UserMixin):  # type: ignore
         access_token = create_access_token(identity=user)
         return { "access_token" : access_token}
 
-
     @jsonapi_attr
     def _check_sum_(self):  # type: ignore [no-redef]
         return None if isinstance(self, flask_sqlalchemy.model.DefaultMeta) \
@@ -131,8 +137,10 @@ class Api(SAFRSBase, Baseauthentication, db.Model, UserMixin):  # type: ignore
     connection_string = Column(String(64))
     owner_id = Column(ForeignKey('User.id'))
 
-    # see backref on parent: owner = relationship('User', cascade_backrefs=False, backref='ApiList')
+    # parent relationships (access parent)
+    owner : Mapped["User"] = relationship(back_populates=("ApiList"))
 
+    # child relationships (access children)
 
     @jsonapi_attr
     def _check_sum_(self):  # type: ignore [no-redef]
@@ -157,9 +165,11 @@ class UserRole(SAFRSBase, Baseauthentication, db.Model, UserMixin):  # type: ign
     role_name = Column(ForeignKey('Role.name'), primary_key=True)
     allow_client_generated_ids = True
 
-    # see backref on parent: Role = relationship('Role', cascade_backrefs=False, backref='UserRoleList')
-    # see backref on parent: user = relationship('User', cascade_backrefs=False, backref='UserRoleList')
+    # parent relationships (access parent)
+    Role : Mapped["Role"] = relationship(back_populates=("UserRoleList"))
+    user : Mapped["User"] = relationship(back_populates=("UserRoleList"))
 
+    # child relationships (access children)
 
     @jsonapi_attr
     def _check_sum_(self):  # type: ignore [no-redef]
