@@ -7,7 +7,14 @@
 
 import sys, os
 import datetime
-from behave.__main__ import main as behave_main  # behave is pip'd...
+
+try:
+    from behave.__main__ import main as behave_main  # behave is pip'd...
+except:
+    python_path = ""
+    for p in sys.path:
+        python_path += f'..{p}\n'
+    raise Exception(f"\nbehave_run - unable to find behave.  PYTHONPATH..\n{python_path}") 
 
 if __name__ == "__main__":
     print("\nbehave_run started at:", os.getcwd())
@@ -23,12 +30,12 @@ if __name__ == "__main__":
         
     date_time = str(datetime.datetime.now().strftime("%B %d, %Y %H:%M:%S"))
     if log_file_name is None:
-        sys.stdout.write(f'\nCompleted at {date_time}')
+        sys.stdout.write(f'\n{__file__} completed at {date_time} (no log)')
     else:
         with open(log_file_name, 'a') as log_file:
             log_file.write(f'')
             log_file.write(f'&nbsp;&nbsp;')
             log_file.write(f'')
-            log_file.write(f'\nCompleted at {date_time}')
-    print(f'\ndebug_behave exit at {date_time}\n\n')
+            log_file.write(f'\n{__file__} completed at {date_time}')
+    print(f'\n{__file__} exit at {date_time}, result: {behave_result}\n\n')
     sys.exit(behave_result)

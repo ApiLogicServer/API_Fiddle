@@ -1,5 +1,5 @@
 about:
-  date: July 04, 2023 19:06:59
+  date: August 22, 2023 13:45:56
   recent_changes: works with modified safrs-react-admin
   version: 0.0.0
 api_root: '{http_type}://{swagger_host}:{port}/{api}'
@@ -11,13 +11,13 @@ info:
 resources:
   authentication-Api:
     attributes:
-    - label: ' id*'
-      name: id
+    - label: ' name*'
+      name: name
       search: true
       sort: true
     - name: owner_id
-    - name: name
     - name: connection_string
+    - name: id
     tab_groups:
     - direction: toone
       fks:
@@ -25,7 +25,7 @@ resources:
       name: owner
       resource: authentication-User
     type: Api
-    user_key: id
+    user_key: name
   authentication-Role:
     attributes:
     - label: ' name*'
@@ -48,12 +48,12 @@ resources:
       search: true
       sort: true
     - name: notes
-    - name: client_id
-    - name: id
-      required: true
     - name: username
     - name: email
     - name: password_hash
+    - name: client_id
+    - name: id
+      required: true
     tab_groups:
     - direction: tomany
       fks:
@@ -69,8 +69,8 @@ resources:
     user_key: name
   authentication-UserRole:
     attributes:
-    - label: ' user_id*'
-      name: user_id
+    - label: ' role_name*'
+      name: role_name
       required: true
       search: true
       sort: true
@@ -91,7 +91,7 @@ resources:
       name: user
       resource: authentication-User
     type: UserRole
-    user_key: user_id
+    user_key: role_name
 settings:
   HomeJS: http://localhost:5656/admin-app/home.js
   max_list_columns: 8
